@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/txtFakultasTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Laporan: FISIP"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:textAlignment="center"
+            android:textColor="#1A237E"
+            android:layout_marginBottom="16dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp">
+            <ImageView
+                android:id="@+id/imgInterview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/kelas_fisip"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="8dp"
+            app:cardBackgroundColor="#212121">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:text="Kenyamanan Ruang Kelas"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <RatingBar
+                    android:id="@+id/ratingKelas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:isIndicator="true"
+                    android:layout_marginTop="4dp"/>
+
+                <TextView
+                    android:id="@+id/txtDetailKelas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Komentar kelas..."
+                    android:layout_marginTop="4dp"
+                    android:textColor="#FFFFFF"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="8dp"
+            app:cardBackgroundColor="#212121">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:id="@+id/txtFasilitasLabel"
+                    android:text="Kenyamanan Fasilitas GOR / Lainnya"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <RatingBar
+                    android:id="@+id/ratingFasilitas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:isIndicator="true"
+                    android:layout_marginTop="4dp"/>
+
+                <TextView
+                    android:id="@+id/txtDetailFasilitas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Komentar fasilitas..."
+                    android:layout_marginTop="4dp"
+                    android:textColor="#FFFFFF"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBack"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_weight="1"
+                android:text="KEMBALI"
+                android:textColor="#FFFFFF"
+                app:backgroundTint="@null"
+                android:background="@drawable/btn_selector"
+                android:layout_marginEnd="8dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnNext"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_weight="1"
+                android:text="SELANJUTNYA"
+                android:textColor="#FFFFFF"
+                app:backgroundTint="@null"
+                android:background="@drawable/btn_selector"
+                android:layout_marginStart="8dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
