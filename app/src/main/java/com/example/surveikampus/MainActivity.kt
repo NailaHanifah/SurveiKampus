@@ -1,4 +1,4 @@
-package com.example.surveikampus // SESUAIKAN DENGAN PACKAGEMU
+package com.example.surveikampus
 
 import android.content.Intent
 import android.media.AudioAttributes
@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-    // Menggunakan Companion Object agar objek MediaPlayer bisa diakses bersama antar halaman
     companion object {
         var mediaPlayer: MediaPlayer? = null
     }
@@ -23,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // 1. Inisialisasi Musik Latar (Hanya jika belum pernah dinyalakan)
+        // 1. Inisialisasi Musik Latar
         if (mediaPlayer == null) {
             mediaPlayer = MediaPlayer.create(this, R.raw.bg_music)
             mediaPlayer?.isLooping = true
@@ -32,12 +31,11 @@ class MainActivity : AppCompatActivity() {
             mediaPlayer?.start()
         }
 
-        // 2. Inisialisasi SoundPool dengan Listener agar tahu kapan audio siap pakai
+        // 2. Inisialisasi SoundPool
         val audioAttributes = AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
             .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
             .build()
-        // Ganti baris inisialisasi SoundPool lama dengan 1 baris universal ini:
         soundPool = SoundPool(1, android.media.AudioManager.STREAM_MUSIC, 0)
 
         soundPool.setOnLoadCompleteListener { _, _, status ->
@@ -47,7 +45,6 @@ class MainActivity : AppCompatActivity() {
 
         val btnLihatHasil = findViewById<Button>(R.id.btnLihatHasil)
         btnLihatHasil.setOnClickListener {
-            // Mainkan efek suara jika sudah selesai dimuat
             if (isSoundLoaded) {
                 soundPool.play(soundId, 1f, 1f, 0, 0, 1f)
             }
@@ -59,7 +56,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onTrimMemory(level: Int) {
         super.onTrimMemory(level)
-        // Jika level memori menandakan aplikasi disembunyikan/minimize ke latar belakang
         if (level == TRIM_MEMORY_UI_HIDDEN) {
             MainActivity.mediaPlayer?.pause()
         }
@@ -67,7 +63,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        // Saat pengguna balik lagi masuk ke dalam aplikasi, musik otomatis jalan lagi
         if (MainActivity.mediaPlayer?.isPlaying == false) {
             MainActivity.mediaPlayer?.start()
         }

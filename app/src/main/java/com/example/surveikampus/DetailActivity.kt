@@ -1,4 +1,4 @@
-package com.example.surveikampus // SESUAIKAN DENGAN PACKAGEMU
+package com.example.surveikampus
 
 import android.media.AudioAttributes
 import android.media.SoundPool
@@ -16,11 +16,11 @@ class DetailActivity : AppCompatActivity() {
     private var isSoundLoaded = false
     private var currentIndex = 0
 
-    // 1. STRUKTUR DATA BARU (DITAMBAH SLOT FOTO INTERVIEW)
+    // 1. STRUKTUR DATA
     data class LaporanFakultas(
         val namaFakultas: String,
         val fotoResId: Int,
-        val fotoInterviewResId: Int, // <-- BARU
+        val fotoInterviewResId: Int,
         val skorKelas: Float,
         val detailKelas: String,
         val labelFasilitas: String,
@@ -61,12 +61,11 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        // Inisialisasi SoundPool dengan aman
+        // Inisialisasi SoundPool
         val audioAttributes = AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
             .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
             .build()
-        // Ganti baris inisialisasi SoundPool lama dengan 1 baris universal ini:
         soundPool = SoundPool(1, android.media.AudioManager.STREAM_MUSIC, 0)
 
         soundPool.setOnLoadCompleteListener { _, _, status ->
@@ -74,10 +73,10 @@ class DetailActivity : AppCompatActivity() {
         }
         soundId = soundPool.load(this, R.raw.sound_click, 1)
 
-        // Inisialisasi Views (Sudah rapi & tanpa duplikat)
+        // Inisialisasi Views
         val txtFakultasTitle = findViewById<TextView>(R.id.txtFakultasTitle)
         val imgInterview = findViewById<ImageView>(R.id.imgInterview)
-        val imgDokumentasiWawancara = findViewById<ImageView>(R.id.imgDokumentasiWawancara) // <-- Letakkan di sini agar rapi berkumpul dengan sesama ImageView
+        val imgDokumentasiWawancara = findViewById<ImageView>(R.id.imgDokumentasiWawancara)
         val ratingKelas = findViewById<RatingBar>(R.id.ratingKelas)
         val txtDetailKelas = findViewById<TextView>(R.id.txtDetailKelas)
         val txtFasilitasLabel = findViewById<TextView>(R.id.txtFasilitasLabel)
@@ -93,20 +92,16 @@ class DetailActivity : AppCompatActivity() {
             imgDokumentasiWawancara.setImageResource(data.fotoInterviewResId)
             ratingKelas.rating = data.skorKelas
 
-            // Ditambahkan label "Hasil Wawancara Responden" di atas isi keluhan kelas
             txtDetailKelas.text = "Hasil Wawancara Responden:\n${data.detailKelas}"
 
             txtFasilitasLabel.text = data.labelFasilitas
             ratingFasilitas.rating = data.skorFasilitas
 
-            // Ditambahkan label "Hasil Wawancara Responden" di atas isi keluhan fasilitas
             txtDetailFasilitas.text = "Hasil Wawancara Responden:\n${data.detailFasilitas}"
 
             if (index == dataLaporan.size - 1) {
-                // Jika berada di data terakhir (Fakultas TI), sembunyikan tombol Selanjutnya
                 btnNext.visibility = android.view.View.GONE
             } else {
-                // Jika bukan di data terakhir, tampilkan kembali tombol Selanjutnya
                 btnNext.visibility = android.view.View.VISIBLE
             }
         }
@@ -125,10 +120,8 @@ class DetailActivity : AppCompatActivity() {
             if (isSoundLoaded) soundPool.play(soundId, 1f, 1f, 0, 0, 1f)
 
             if (currentIndex == 0) {
-                // LOGIKA BARU: Jika di halaman pertama (FISIP), klik KEMBALI akan menutup halaman ini dan balik ke Beranda
                 finish()
             } else {
-                // Jika di halaman selain pertama, mundurkan halaman seperti biasa
                 currentIndex--
                 renderData(currentIndex)
             }
